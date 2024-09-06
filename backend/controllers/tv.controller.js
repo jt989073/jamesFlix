@@ -1,5 +1,8 @@
 import { fetchFromTMBDB } from "../services/tmdb.service.js";
 
+
+// #TODO: make dynamic tv vs movie  route, simplify code base
+
 export const getTrendingTV = async (req, res) => {
   try {
     const data = await fetchFromTMBDB(

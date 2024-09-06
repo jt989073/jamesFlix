@@ -23,13 +23,11 @@ export const signup = async (req, res, next) => {
 
     if (!passwordRegex.test(password)) {
       console.log("first");
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message:
-            "must have length of 8 characters, have an uppercase and lowercase letter, and a special character",
-        });
+      return res.status(400).json({
+        success: false,
+        message:
+          "must have length of 8 characters, have an uppercase and lowercase letter, and a special character",
+      });
     }
 
     const existingUserEmail = await User.findOne({ email: email });
@@ -76,14 +74,55 @@ export const signup = async (req, res, next) => {
   }
 };
 
-export const login = async (req, res, next) => {};
+export const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ success: false, message: "All fields are required" });
+    }
+
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message: "Invalid Credentials",
+        });
+    }
+
+    const isPasswordCorrect = await bcryptjs.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid Credentials" });
+    }
+
+    generateTokenAndSetCookie(user._id, res);
+
+    return res
+      .status(201)
+      .json({ success: true, user: { ...user._doc, password: "" } });
+  } catch (error) {
+    console.log("Error in login controller: ", error.message);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
+  }
+};
 
 export const logout = async (req, res, next) => {
   try {
-    res.clearCookie('jwt-jamesFlix')
-   return  res.status(200).json({success: true, message: 'Logout out successfully'})
+    res.clearCookie("jwt-jamesFlix");
+    return res
+      .status(200)
+      .json({ success: true, message: "Logout out successfully" });
   } catch (error) {
-    console.log("Error in logout controlller: ", error.message)
-    return res.status(500).json({success: false, message: 'Internal Server Error'})
+    console.log("Error in logout controlller: ", error.message);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
   }
 };

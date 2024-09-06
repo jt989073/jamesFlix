@@ -8,14 +8,13 @@ const port = ENV_VARS.PORT;
 const app = express();
 
 app.use(express.json());
-
 app.use("/api", authRoutes);
 
-if (ENV_VARS.ENVIRONMENT === "development") {
-  app.use((req, res) => {
+app.use((req, res) => {
+  if (ENV_VARS.NODE_ENV === "development") {
     console.log(req.method, req.statusCode);
-  });
-}
+  }
+});
 
 app.listen(port, () => {
   console.log(`server started at local host: ${port}`);

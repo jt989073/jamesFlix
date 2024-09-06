@@ -71,7 +71,7 @@ export const getSimilarTVs = async (req, res) => {
 export const getTVsByCategory = async (req, res) => {
   const { category } = req.params;
   try {
-      console.log(category)
+
     const data = await fetchFromTMBDB(
         `https://api.themoviedb.org/3/tv/${category}?language=en-US&page=1`
     );

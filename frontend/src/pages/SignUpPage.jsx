@@ -3,19 +3,28 @@ import { Link } from "react-router-dom";
 
 // TODO: make a better nav bar
 const SignUpPage = () => {
-const [email, setEmail] = useState('')
-const [username, setUsername] = useState('')
-const [password, setPassword] = useState('')
-const [confirmPassword, setConfirmPassword] = useState('')
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-const handleSubmit = e => {
-  e.preventDefault()
-  
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if(password !== confirmPassword){
+      console.log('passwords dont match')
+    }
+
+    const newUser = {
+      email,
+      username,
+      password
+    }
+  };
 
   return (
     <div className="h-screen w-full hero-bg">
-      <header className="max-w-6xl mx-auto flex items-center justify-between p-4">
+      <header className="max-w-6xl mx-auto flex items-center justify-between p-4 pb-10">
         <Link to="/">
           <img src="/netflix-logo.png" alt="logo" className="w-52" />
         </Link>
@@ -39,7 +48,7 @@ const handleSubmit = e => {
                 placeholder="you@mail.com"
                 id="email"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -55,7 +64,7 @@ const handleSubmit = e => {
                 placeholder="you123"
                 id="username"
                 value={username}
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div>
@@ -71,7 +80,7 @@ const handleSubmit = e => {
                 placeholder="password"
                 id="password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div>
@@ -87,12 +96,19 @@ const handleSubmit = e => {
                 placeholder="confirm password"
                 id="confirm-password"
                 value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
-            <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">Sign Up</button>
+            <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">
+              Sign Up
+            </button>
           </form>
-          <div className="text-center text-gray-400">Already have an account? <Link to={'/login'} className="text-red-500 hover:underline">Sign In</Link></div>
+          <div className="text-center text-gray-400">
+            Already have an account?{" "}
+            <Link to={"/login"} className="text-red-500 hover:underline">
+              Sign In
+            </Link>
+          </div>
         </div>
       </div>
     </div>

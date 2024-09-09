@@ -89,7 +89,7 @@ export const signup = async (req, res, next) => {
         .json({ success: false, message: "username already exists." });
     }
 
-    const profilePics = ["/avatar1.png", "/avatar2.jpg", "/avatar3.png"];
+    const profilePics = ["/avatar1.png", "/avatar2.png", "/avatar3.png"];
     const image = profilePics[Math.floor(Math.random() * profilePics.length)];
 
     const salt = await bcryptjs.genSalt(10);

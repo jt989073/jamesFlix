@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import {LogOut, Search, Menu} from 'lucide-react'
-import { useAuthStore } from "../../src/store/AuthUser.js";
+import { useAuthStore } from "../store/AuthUser.js";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const {user, logout} = useAuthStore()
-  console.log(user.image)
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
@@ -23,15 +22,15 @@ const Navbar = () => {
         </Link>
         {/* TODO: componentize this for desktop */}
         <div className="hidden sm:flex gap-2 items-center">
-          <Link to="/" className="hover:underline">
+          <NavLink to="/" className="hover:underline">
             Movies
-          </Link>
-          <Link to="/" className="hover:underline">
+          </NavLink>
+          <NavLink to="/" className="hover:underline">
             Tv Shows
-          </Link>
-          <Link to="/history" className="hover:underline">
+          </NavLink>
+          <NavLink to="/history" className="hover:underline">
             Search History
-          </Link>
+          </NavLink>
         </div>
       </div>
 

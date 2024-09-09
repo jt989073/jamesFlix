@@ -1,25 +1,34 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useAuthStore } from "../store/AuthUser.js";
+import toast from "react-hot-toast";
 
 // TODO: make a better nav bar
 const SignUpPage = () => {
-  const [email, setEmail] = useState("");
+  let { searchParams } = new URL(document.location);
+  const emailVal = searchParams.get("email");
+  const [email, setEmail] = useState(emailVal || "");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const { signup } = useAuthStore();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(password !== confirmPassword){
-      console.log('passwords dont match')
+    if (password !== confirmPassword) {
+      toast.error("Passwords and confirm password must match");
     }
 
     const newUser = {
       email,
       username,
-      password
-    }
+      password,
+    };
+
+    signup(newUser);
   };
 
   return (

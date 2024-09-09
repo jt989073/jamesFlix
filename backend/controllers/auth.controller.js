@@ -18,15 +18,55 @@ export const signup = async (req, res, next) => {
     }
 
     // must have length of 8 characters, have an uppercase and lowercase letter,\ and a special character
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*_?&])[A-Za-z\d@$!%*_?&]{8,}$/;
+    // const passwordRegex =
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*_?&])[A-Za-z\d@$!%*_?&]{8,}$/;
 
-    if (!passwordRegex.test(password)) {
-      console.log("first");
+    // if (!passwordRegex.test(password)) {
+    //   console.log("first");
+    //   return res.status(400).json({
+    //     success: false,
+    //     message:
+    //       "Password must have length of 8 characters, have an uppercase and lowercase letter, and a special character",
+    //   });
+    // }
+    const passwordRegexLength = /^.{8,}$/;
+    const passwordRegexUppercase = /[A-Z]/;
+    const passwordRegexLowercase = /[a-z]/;
+    const passwordRegexDigit = /\d/;
+    const passwordRegexSpecialChar = /[@$!%*_?&]/;
+    
+    let errors = {};
+    
+    // Check if password meets the length requirement
+    if (!passwordRegexLength.test(password)) {
+      errors.length = "Password must be at least 8 characters long.";
+    }
+    
+    // Check if password contains at least one uppercase letter
+    if (!passwordRegexUppercase.test(password)) {
+      errors.uppercase = "Password must contain at least one uppercase letter.";
+    }
+    
+    // Check if password contains at least one lowercase letter
+    if (!passwordRegexLowercase.test(password)) {
+      errors.lowercase = "Password must contain at least one lowercase letter.";
+    }
+    
+    // Check if password contains at least one digit
+    if (!passwordRegexDigit.test(password)) {
+      errors.digit = "Password must contain at least one digit.";
+    }
+    
+    // Check if password contains at least one special character
+    if (!passwordRegexSpecialChar.test(password)) {
+      errors.specialChar = "Password must contain at least one special character (@$!%*_?&).";
+    }
+    
+    // If there are any errors, return them as separate fields
+    if (Object.keys(errors).length > 0) {
       return res.status(400).json({
         success: false,
-        message:
-          "must have length of 8 characters, have an uppercase and lowercase letter, and a special character",
+        errors: errors,
       });
     }
 
@@ -85,12 +125,10 @@ export const login = async (req, res, next) => {
 
     const user = await User.findOne({ email: email });
     if (!user) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Invalid Credentials",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Invalid Credentials",
+      });
     }
 
     const isPasswordCorrect = await bcryptjs.compare(password, user.password);

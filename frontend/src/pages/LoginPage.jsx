@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { useAuthStore } from "../store/AuthUser";
+
+
 const LoginPage = () => {
+  const {user, isLoggingIn, login} = useAuthStore()
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const newUser = {
+      email,
+      password
+    }
+
+    login(newUser)
   };
 
   return (
@@ -37,6 +47,7 @@ const LoginPage = () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div>
@@ -53,10 +64,11 @@ const LoginPage = () => {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md hover:bg-red-700">
-              Sign Up
+              Login
             </button>
           </form>
           <div className="text-center text-gray-400">

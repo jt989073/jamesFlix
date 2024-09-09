@@ -5,6 +5,7 @@ import { create } from "zustand";
 export const useAuthStore = create((set) => ({
   user: null,
   isSigningUp: false,
+  isLoggingIn: false,
   isCheckingAuth: true,
   isLoggingOut: true,
   signup: async (credentials) => {
@@ -25,10 +26,14 @@ export const useAuthStore = create((set) => ({
       set({ isSigningUp: false, user: null });
     }
   },
-  login: async () => {
+  login: async (credentials) => {
     try {
-      let res = await axios.post("/api/auth/login");
-    } catch (error) {}
+      let res = await axios.post("/api/auth/login", credentials);
+      set({ user: res.data.user, isLoggingIn: false });
+    } catch (error) {
+      toast.error(error.response.data.message || "Login Failed")
+      set({ isSigningUp: false, user: null });
+    }
   },
   logout: async () => {
     try {

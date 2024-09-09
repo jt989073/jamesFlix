@@ -6,7 +6,7 @@ const AuthScreen = () => {
 	const [email, setEmail] = useState("");
 	const navigate = useNavigate();
 
-	const handleFormSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		navigate("/signup?email=" + email);
 	};
@@ -27,7 +27,7 @@ const AuthScreen = () => {
 				<p className='text-lg mb-4'>Watch anywhere. Cancel anytime.</p>
 				<p className='mb-4'>Ready to watch? Enter your email to create or restart your membership.</p>
 
-				<form className='flex flex-col md:flex-row gap-4 w-1/2' onSubmit={handleFormSubmit}>
+				<form className='flex flex-col md:flex-row gap-4 w-1/2' onSubmit={handleSubmit}>
 					<input
 						type='email'
 						placeholder='Email address'

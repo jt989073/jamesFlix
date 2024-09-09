@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useAuthStore } from "../store/AuthUser.js";
 import toast from "react-hot-toast";
 
 // TODO: make a better nav bar
 const SignUpPage = () => {
+  const navigate = useNavigate()
   let { searchParams } = new URL(document.location);
   const emailVal = searchParams.get("email");
   const [email, setEmail] = useState(emailVal || "");
@@ -29,6 +30,7 @@ const SignUpPage = () => {
     };
 
     signup(newUser);
+    navigate('/')
   };
 
   return (

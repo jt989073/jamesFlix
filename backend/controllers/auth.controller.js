@@ -34,34 +34,35 @@ export const signup = async (req, res, next) => {
     const passwordRegexLowercase = /[a-z]/;
     const passwordRegexDigit = /\d/;
     const passwordRegexSpecialChar = /[@$!%*_?&]/;
-    
+
     let errors = {};
-    
+
     // Check if password meets the length requirement
     if (!passwordRegexLength.test(password)) {
       errors.length = "Password must be at least 8 characters long.";
     }
-    
+
     // Check if password contains at least one uppercase letter
     if (!passwordRegexUppercase.test(password)) {
       errors.uppercase = "Password must contain at least one uppercase letter.";
     }
-    
+
     // Check if password contains at least one lowercase letter
     if (!passwordRegexLowercase.test(password)) {
       errors.lowercase = "Password must contain at least one lowercase letter.";
     }
-    
+
     // Check if password contains at least one digit
     if (!passwordRegexDigit.test(password)) {
       errors.digit = "Password must contain at least one digit.";
     }
-    
+
     // Check if password contains at least one special character
     if (!passwordRegexSpecialChar.test(password)) {
-      errors.specialChar = "Password must contain at least one special character (@$!%*_?&).";
+      errors.specialChar =
+        "Password must contain at least one special character (@$!%*_?&).";
     }
-    
+
     // If there are any errors, return them as separate fields
     if (Object.keys(errors).length > 0) {
       return res.status(400).json({
@@ -159,6 +160,17 @@ export const logout = async (req, res, next) => {
       .json({ success: true, message: "Logout out successfully" });
   } catch (error) {
     console.log("Error in logout controlller: ", error.message);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
+  }
+};
+
+export const authCheck = async (req, res, next) => {
+  try {
+    return res.json({ success: true, user: req.user });
+  } catch (error) {
+    console.log("Error in AuthCheck Controller: ", error.message);
     return res
       .status(500)
       .json({ success: false, message: "Internal Server Error" });

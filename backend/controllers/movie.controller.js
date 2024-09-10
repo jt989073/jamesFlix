@@ -71,13 +71,13 @@ export const getSimilarMoviees = async (req, res) => {
 export const getMoviesByCategory = async (req, res) => {
   const { category } = req.params;
   try {
-
     const data = await fetchFromTMBDB(
         `https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`
     );
     // 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1'
-    return res.json({ success: true, similar: data.results });
+    return res.json({ success: true, content: data.results });
   } catch (error) {
+    console.log(error.toJSON(), 'adkfjhasdklf')
     if (error.message.includes("404")) {
         return res.status(404).send(null);
       }

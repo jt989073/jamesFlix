@@ -16,7 +16,9 @@ import { useContentStore } from "../../store/content";
 const HomeScreen = () => {
   const [isExpanded, setIsExpanded] = useState();
   const { trendingContent } = useGetTrendingContent();
-  const { contentType } = useContentStore;
+  const { contentType } = useContentStore();
+
+  console.log(contentType)
 
   if (!trendingContent) {
     return (
@@ -103,9 +105,11 @@ const HomeScreen = () => {
               ? MOVIE_CATEGORIES.map((category) => (
                   <MovieSlider key={category} category={category} />
                 ))
-              : TV_CATEGORIES.map((category) => (
+              : 
+              TV_CATEGORIES.map((category) => (
                   <MovieSlider key={category} category={category} />
-                ))}
+                ))
+                }
           </div>
         </>
       )}

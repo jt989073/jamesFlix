@@ -10,7 +10,7 @@ export const getTrendingTV = async (req, res) => {
     );
 
     const randomtv =
-      data.results[Math.floor(Math.random()) * data.results?.length];
+      data.results[Math.floor(Math.random() * data.results?.length)];
 
     return res.json({ sucess: true, content: randomtv });
   } catch (error) {

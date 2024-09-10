@@ -6,8 +6,9 @@ export const getTrendingMovie = async (req, res) => {
       "https://api.themoviedb.org/3/trending/movie/day?language=en-US"
     );
 
+
     const randomMovie =
-      data.results[Math.floor(Math.random()) * data.results?.length];
+      data.results[Math.floor(Math.random() * data.results?.length)];
 
     return res.json({ sucess: true, content: randomMovie });
   } catch (error) {

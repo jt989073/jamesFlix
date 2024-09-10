@@ -4,9 +4,9 @@ import { getTrendingMovie, getMovieTrailers, getMovieDetails, getSimilarMoviees,
 const router = express.Router()
 
 router.get('/trending', getTrendingMovie)
+router.get('/:category', getMoviesByCategory)
 router.get('/:id/trailers', getMovieTrailers)
 router.get('/:id/details', getMovieDetails)
 router.get('/:id/similar', getSimilarMoviees)
-router.get('/:category', getMoviesByCategory)
 
 export default router

@@ -10,7 +10,7 @@ export const getTrendingTV = async (req, res) => {
     );
 
     const randomtv =
-      data.results[Math.floor(Math.random()) * data.results?.length];
+      data.results[Math.floor(Math.random() * data.results?.length)];
 
     return res.json({ sucess: true, content: randomtv });
   } catch (error) {
@@ -71,12 +71,10 @@ export const getSimilarTVs = async (req, res) => {
 export const getTVsByCategory = async (req, res) => {
   const { category } = req.params;
   try {
-
     const data = await fetchFromTMBDB(
         `https://api.themoviedb.org/3/tv/${category}?language=en-US&page=1`
     );
-    // 'https://api.themoviedb.org/3/tv/popular?language=en-US&page=1'
-    return res.json({ success: true, similar: data.results });
+    return res.json({ success: true, content: data.results });
   } catch (error) {
     if (error.message.includes("404")) {
         return res.status(404).send(null);

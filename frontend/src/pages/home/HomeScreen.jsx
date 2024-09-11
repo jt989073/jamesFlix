@@ -41,7 +41,6 @@ const HomeScreen = () => {
           className="absolute top-0 left-0 w-full h-full object-cover -z-50"
           onLoad={() => setImgLoading(false)}
         />
-        }
         <div
           className="absolute top-0 left-0 w-full h-full object-cover bg-black/50 -z-50"
           aria-hidden="true"

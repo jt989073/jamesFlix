@@ -29,7 +29,11 @@ const SignUpPage = () => {
       password,
     };
 
-    signup(newUser);
+    try {
+      signup(newUser);
+    } catch (error) {
+      return
+    }
     navigate('/')
   };
 

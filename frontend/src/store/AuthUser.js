@@ -26,6 +26,7 @@ export const useAuthStore = create((set) => ({
         toast.error(error.response?.data?.message || "Signup failed");
       }
       set({ user: null, isSigningUp: false });
+      return
     }
   },
 

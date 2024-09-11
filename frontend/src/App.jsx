@@ -10,6 +10,7 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import Footer from "./components/footer.jsx";
 import "./App.css";
 import { Loader } from "lucide-react";
+import WatchPage from "./pages/WatchPage.jsx";
 
 function App() {
   const { user, authCheck, isCheckingAuth } = useAuthStore();
@@ -39,6 +40,14 @@ function App() {
         <Route
           path="/signup"
           element={!user ? <SignUpPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signup"
+          element={!user ? <SignUpPage /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/watch/:id"
+          element={user ? <WatchPage /> : <Navigate to="/login" />}
         />
       </Routes>
       <Footer />

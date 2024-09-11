@@ -17,8 +17,8 @@ const HomeScreen = () => {
   const [isExpanded, setIsExpanded] = useState();
   const { trendingContent } = useGetTrendingContent();
   const { contentType } = useContentStore();
+  
 
-  console.log(contentType)
 
   if (!trendingContent) {
     return (

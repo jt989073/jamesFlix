@@ -15,7 +15,7 @@ const Navbar = () => {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
-    <header className="max-w-6xl mx- auto flex flex-wrap items-center justify-between p-4 h-20">
+    <header className="max-w-6xl mx-auto flex flex-wrap items-center justify-between p-4 h-20">
       <div className="flex items-center gap-10 z-50">
         <Link to="/">
           <img
@@ -40,10 +40,10 @@ const Navbar = () => {
 
       <div className='flex gap-2 items-center z-50'>
 				<Link to={"/search"}>
-					<Search className='size-6 cursor-pointer' />
+					<Search className='size-6 cursor-pointer text-white' />
 				</Link>
 				<img src={user.image} alt='Avatar' className='h-8 rounded cursor-pointer' />
-				<LogOut className='size-6 cursor-pointer' onClick={logout} />
+				<LogOut className='size-6 cursor-pointer text-white' onClick={logout} />
 				<div className='sm:hidden'>
 					<Menu className='size-6 cursor-pointer' onClick={toggleMobileMenu} />
 				</div>

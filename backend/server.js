@@ -1,6 +1,7 @@
 import express from "express";
 import authRoutes from "./routes/auth.route.js";
 import movieRoutes from './routes/movies.route.js'
+import path from 'path'
 import tvRoutes from './routes/tv.route.js'
 import searchRoutes from './routes/search.route.js'
 import  protectRoute  from "./middleware/protectRoute.js";
@@ -9,6 +10,7 @@ import { connectDB } from "./config/db.js";
 import cookieParser from "cookie-parser";
 
 const port = ENV_VARS.PORT;
+const __dirname = path.resolve()
 
 const app = express();
 
@@ -18,6 +20,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/movie", protectRoute, movieRoutes);
 app.use("/api/tv",protectRoute, tvRoutes);
 app.use("/api/search",protectRoute, searchRoutes);
+
+if(ENV_VARS.NODE_ENV === 'production'){
+  
+}
 
 app.use((req, res) => {
   if (ENV_VARS.NODE_ENV === "development") {

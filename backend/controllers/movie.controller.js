@@ -12,7 +12,6 @@ export const getTrendingMovie = async (req, res) => {
 
     return res.json({ sucess: true, content: randomMovie });
   } catch (error) {
-    console.log("error in getTrending Movie: ", error.message);
     return res
       .status(500)
       .json({ sucess: false, message: "Internal Server Error" });
@@ -77,7 +76,6 @@ export const getMoviesByCategory = async (req, res) => {
     // 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1'
     return res.json({ success: true, content: data.results });
   } catch (error) {
-    console.log(error.toJSON(), 'adkfjhasdklf')
     if (error.message.includes("404")) {
         return res.status(404).send(null);
       }

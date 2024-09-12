@@ -14,7 +14,7 @@ export const getTrendingTV = async (req, res) => {
 
     return res.json({ sucess: true, content: randomtv });
   } catch (error) {
-    console.log("error in getTrending tv: ", error.message);
+
     return res
       .status(500)
       .json({ sucess: false, message: "Internal Server Error" });

@@ -28,7 +28,7 @@ export const searchPerson = async (req, res) => {
 
     return res.json({ success: true, content: response.results });
   } catch (error) {
-    console.log("error in search person controller: ", error.message);
+
     return res
       .status(500)
       .json({ success: false, message: "Invalid Server Error" });
@@ -59,7 +59,6 @@ export const searchMovie = async (req, res) => {
       return res.json({ success: true, content: response.results });
 
     } catch (error) {
-      console.log("error in search movie controller: ", error.message);
       return res
         .status(500)
         .json({ success: false, message: "Invalid Server Error" });
@@ -89,7 +88,6 @@ export const searchTv = async (req, res) => {
   
       return res.json({ success: true, content: response.results });
     } catch (error) {
-      console.log("error in search tv controller: ", error.message);
       return res
         .status(500)
         .json({ success: false, message: "Invalid Server Error" });
@@ -115,6 +113,5 @@ export const removeFromSearchHistory = async (req, res) => {
 
         return res.json({success: true, message: 'Item removed from search history'})
     } catch (error) {
-        console.log('error from deleteSearch controller: ', error.message)
     }
 }

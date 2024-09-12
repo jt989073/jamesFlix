@@ -29,11 +29,7 @@ if(ENV_VARS.NODE_ENV === 'production'){
   })
 }
 
-app.use((req, res) => {
-  if (ENV_VARS.NODE_ENV === "development") {
-    console.log(req.method, req.statusCode);
-  }
-});
+
 
 
 app.listen(port, () => {

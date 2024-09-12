@@ -18,6 +18,7 @@ const SearchPage = () => {
     setActiveTab(tab);
     tab === "movie" ? setContentType("movie") : setContentType("tv");
     setResults([]);
+    setSearchTerm('')
   };
 
   const handleSubmit = async (e) => {

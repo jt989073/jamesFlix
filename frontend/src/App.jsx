@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { Loader } from "lucide-react";
 
 import { useAuthStore } from "./store/AuthUser.js";
 
@@ -8,10 +9,11 @@ import HomePage from "./pages/home/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import Footer from "./components/footer.jsx";
-import "./App.css";
-import { Loader } from "lucide-react";
 import WatchPage from "./pages/WatchPage.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
+import SearchHistoryPage from "./pages/SearchHistoryPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
+import "./App.css";
 
 function App() {
   const { user, authCheck, isCheckingAuth } = useAuthStore();
@@ -50,10 +52,15 @@ function App() {
           path="/watch/:id"
           element={user ? <WatchPage /> : <Navigate to="/login" />}
         />
-                <Route
+        <Route
           path="/search"
           element={user ? <SearchPage /> : <Navigate to="/login" />}
         />
+        <Route
+          path="/history"
+          element={user ? <SearchHistoryPage /> : <Navigate to={"/login"} />}
+        />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
       <Toaster />

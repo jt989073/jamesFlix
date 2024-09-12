@@ -40,10 +40,10 @@ const Navbar = () => {
 
       <div className='flex gap-2 items-center z-50'>
 				<Link to={"/search"}>
-					<Search className='size-6 cursor-pointer' />
+					<Search className='size-6 cursor-pointer text-white' />
 				</Link>
 				<img src={user.image} alt='Avatar' className='h-8 rounded cursor-pointer' />
-				<LogOut className='size-6 cursor-pointer' onClick={logout} />
+				<LogOut className='size-6 cursor-pointer text-white' onClick={logout} />
 				<div className='sm:hidden'>
 					<Menu className='size-6 cursor-pointer' onClick={toggleMobileMenu} />
 				</div>
